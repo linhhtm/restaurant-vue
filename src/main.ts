@@ -1,26 +1,16 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-// import 'vuetify/styles'
-import './style.css'
-import HelloWorldVue from './components/HelloWorld.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import VueFeather from 'vue-feather';
 
-const routes = [
-  { path: '/home', component: HelloWorldVue },
-]
+import App from './App.vue'
+import routes from './routes'
+import './style.css'
 
 const router = createRouter({
-  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
   history: createWebHistory(),
-  routes, // short for `routes: routes`
+  routes,
 })
 
-const vuetify = createVuetify({
-  components,
-  directives,
-})
-
-createApp(App).use(vuetify).use(router).mount('#root')
+const app = createApp(App)
+app.component(VueFeather.name, VueFeather)
+app.use(router).mount('#root')

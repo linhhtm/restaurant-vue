@@ -1,0 +1,9 @@
+@layer components {
+    .section-heading {
+        @apply text-4xl sm:text-5xl font-black tracking-wide text-center
+    }
+
+    .sub-heading {
+        @apply font-bold text-primary-500
+    }
+}
