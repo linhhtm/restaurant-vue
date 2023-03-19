@@ -32,7 +32,6 @@
         showNavLinks ? 'open' : 'closed',
       ]"
     >
-    
       <vue-feather type="x" class="w-6 h-6" v-if="showNavLinks"></vue-feather>
       <vue-feather type="menu" class="w-6 h-6" v-else></vue-feather>
     </button>
