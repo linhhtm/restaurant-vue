@@ -1,4 +1,18 @@
-@import './assets/styles/_utilities.scss';
+@import './assets/styles/_layout.scss';
+@import './assets/styles/_heading.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply font-bold px-8 lg:px-10 py-3 rounded bg-primary-500 text-gray-100 hover:bg-primary-700 focus:outline-none transition duration-300
+    }
+    
+    .highlighted-text {
+        @apply bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block
+    }
+    .section-description {
+        @apply mt-4 text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100 max-w-xl
+    }
+}

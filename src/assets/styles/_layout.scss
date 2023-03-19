@@ -1,0 +1,12 @@
+@layer components {
+    .container {
+        position: relative;
+        max-width: unset;
+        width: unset;
+    }
+
+    .content-with-padding-xl {
+        display: block;
+        @apply max-w-screen-xl mx-auto py-20 lg:py-24;
+    }
+}
