@@ -1,3 +1,6 @@
 export * from './layout/header'
 export * from './layout/footer'
 export * from './layout/main'
+export * from './product'
+export * from './post'
+export { default as Modal } from './misc/Modal.vue'

@@ -12,10 +12,6 @@ const MENU_ITEMS = [
         label: 'Pricing'
     },
     {
-        path: 'about',
-        label: 'About'
-    },
-    {
         path: 'contact-us',
         label: 'Contact Us'
     },

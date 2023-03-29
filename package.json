@@ -10,6 +10,7 @@
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "pinia": "^2.0.33",
     "styled-components": "^5.3.6",
     "vue": "^3.2.41",
     "vue-feather": "^2.0.0",
