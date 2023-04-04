@@ -1,2 +1,5 @@
 export { default as Home } from './home/Home.vue'
 export { default as ProductList } from './product/ProductList.vue'
+export { default as ProductDetail } from './product/ProductDetail.vue'
+export { default as PostDetail } from './post/PostDetail.vue'
+export { default as PostList } from './post/PostList.vue'

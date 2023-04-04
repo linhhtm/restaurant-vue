@@ -1,4 +1,6 @@
-export const posts = [
+import { IPost, IProduct } from 'components'
+
+export const posts: IPost[] = [
   {
     imageSrc:
       'http://gl.amthuc365.vn/thumbnails/460/460//uploads/i/Cach-nau-canh-kim-chi-Han-Quoc-nong-hoi-thom-ngon.jpg?v=4.1',
@@ -207,7 +209,7 @@ export const posts = [
   },
 ]
 
-export const products = [
+export const products: IProduct[] = [
   {
     id: 1,
     imageSrc:
@@ -215,9 +217,10 @@ export const products = [
     title: 'Chicken Chilled',
     content: 'Chicken Main Course',
     price: '$5.99',
-    rating: '5.0',
-    reviews: '87',
+    rating: 5,
+    reviews: 87,
     url: '#',
+    categoryTitle: 'Main',
   },
   {
     id: 2,
@@ -226,9 +229,10 @@ export const products = [
     title: 'Samsa Beef',
     content: 'Fried Mexican Beef',
     price: '$3.99',
-    rating: '4.5',
-    reviews: '34',
+    rating: 4.5,
+    reviews: 34,
     url: '#',
+    categoryTitle: 'Main',
   },
   {
     id: 3,
@@ -237,9 +241,10 @@ export const products = [
     title: 'Carnet Nachos',
     content: 'Chilli Crispy Nachos',
     price: '$3.99',
-    rating: '3.9',
-    reviews: '26',
+    rating: 3.9,
+    reviews: 26,
     url: '#',
+    categoryTitle: 'Desserts',
   },
   {
     id: 4,
@@ -248,9 +253,10 @@ export const products = [
     title: 'Guacamole Mex',
     content: 'Mexican Chilli',
     price: '$3.99',
-    rating: '4.2',
-    reviews: '95',
+    rating: 4.2,
+    reviews: 95,
     url: '#',
+    categoryTitle: 'Desserts',
   },
   {
     id: 5,
@@ -259,9 +265,10 @@ export const products = [
     title: 'Chillie Cake',
     content: 'Deepfried Chicken',
     price: '$2.99',
-    rating: '5.0',
-    reviews: '61',
+    rating: 5,
+    reviews: 61,
     url: '#',
+    categoryTitle: 'Soup',
   },
   {
     id: 6,
@@ -270,9 +277,10 @@ export const products = [
     title: 'Nelli',
     content: 'Hamburger & Fries',
     price: '$7.99',
-    rating: '4.9',
-    reviews: '89',
+    rating: 4.9,
+    reviews: 89,
     url: '#',
+    categoryTitle: 'Soup',
   },
   {
     id: 7,
@@ -281,9 +289,10 @@ export const products = [
     title: 'Jalapeno Poppers',
     content: 'Crispy Soyabeans',
     price: '$8.99',
-    rating: '4.6',
-    reviews: '12',
+    rating: 4.6,
+    reviews: 12,
     url: '#',
+    categoryTitle: 'Starters',
   },
   {
     id: 8,
@@ -292,8 +301,9 @@ export const products = [
     title: 'Cajun Chicken',
     content: 'Roasted Chicken & Egg',
     price: '$7.99',
-    rating: '4.2',
-    reviews: '19',
+    rating: 4.2,
+    reviews: 19,
     url: '#',
+    categoryTitle: 'Starters',
   },
 ]

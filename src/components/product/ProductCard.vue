@@ -2,14 +2,14 @@
   <div
     class="card-container mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
   >
-    <a
-      :href="data.url"
+    <router-link
+      :to="`/products/${data.id}`"
       class="group bg-gray-200 rounded-b block max-w-xs mx-auto sm:max-w-none sm:mx-0 relative"
     >
       <div
         class="card-image-container h-56 xl:h-64 bg-center bg-cover relative rounded-t"
         :style="{
-          'background-image': `url('${data.imageSrc}')`,
+          backgroundImage: `url('${data.imageSrc}')`,
         }"
       >
         <div
@@ -59,43 +59,43 @@
         </p>
         <p class="mt-4 text-xl font-bold">{{ data.price }}</p>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { IProduct } from './Product.type'
-import { useProduct } from 'stores'
+  import { defineComponent, PropType } from 'vue'
+  import { IProduct } from './Product.type'
+  import { useProduct } from 'stores'
 
-export default defineComponent({
-  props: {
-    data: {
-      type: Object as PropType<IProduct>,
-      default: {},
+  export default defineComponent({
+    props: {
+      data: {
+        type: Object as PropType<IProduct>,
+        default: {},
+      },
     },
-  },
-  setup() {
-    const storeProduct = useProduct()
+    setup() {
+      const storeProduct = useProduct()
 
-    const toFavoriteList = (data: IProduct) => {
-      storeProduct.updateFavoriteObj(data)
-    }
+      const toFavoriteList = (data: IProduct) => {
+        storeProduct.updateFavoriteObj(data)
+      }
 
-    return {
-      favoriteObj: storeProduct.favoriteObj,
-      toFavoriteList,
-    }
-  },
-})
+      return {
+        favoriteObj: storeProduct.favoriteObj,
+        toFavoriteList,
+      }
+    },
+  })
 </script>
 <style lang="scss">
-.card-heart {
-  @apply text-sm font-bold flex items-end;
-}
-.card-heart svg {
-  @apply w-6 h-6 fill-current text-gray-400;
-}
-.card-heart.liked svg {
-  @apply text-red-600;
-}
+  .card-heart {
+    @apply text-sm font-bold flex items-end;
+  }
+  .card-heart svg {
+    @apply w-6 h-6 fill-current text-gray-400;
+  }
+  .card-heart.liked svg {
+    @apply text-red-600;
+  }
 </style>

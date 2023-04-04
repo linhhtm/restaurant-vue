@@ -1,4 +1,4 @@
-import { Home, ProductList } from 'pages'
+import { Home, ProductList, ProductDetail, PostDetail, PostList } from 'pages'
 
 const routes = [
   {
@@ -6,12 +6,16 @@ const routes = [
     component: Home,
   },
   {
-    path: '/product',
-    name: 'product',
+    path: '/products',
+    name: 'products',
     children: [
       {
+        path: '',
+        component: ProductList,
+      },
+      {
         path: ':id',
-        component: Home,
+        component: ProductDetail,
       },
     ],
   },
@@ -19,6 +23,20 @@ const routes = [
     path: '/search',
     name: 'search',
     component: ProductList,
+  },
+  {
+    path: '/posts',
+    name: 'posts',
+    children: [
+      {
+        path: '',
+        component: PostList,
+      },
+      {
+        path: ':id',
+        component: PostDetail,
+      },
+    ],
   },
 ]
 

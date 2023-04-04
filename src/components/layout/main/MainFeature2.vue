@@ -24,12 +24,12 @@
               A Reputed Brand
             </span>
           </div>
-          <div
+          <h2
             class="section-heading mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl md:text-left leading-tight"
           >
             Why
             <div class="highlighted-text">Choose Us ?</div>
-          </div>
+          </h2>
           <div
             class="description mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100"
           >
@@ -67,37 +67,37 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import DecoratorBlob from 'images/dot-pattern.svg?component'
+  import { defineComponent, PropType } from 'vue'
+  import DecoratorBlob from 'images/dot-pattern.svg?component'
 
-export default defineComponent({
-  props: {
-    statistics: {
-      type: Object as PropType<Record<string, string>[]>,
-      default: [
-        {
-          key: 'Orders',
-          value: '94000+',
-        },
-        {
-          key: 'Customers',
-          value: '11000+',
-        },
-        {
-          key: 'Chefs',
-          value: '1500+',
-        },
-      ],
+  export default defineComponent({
+    props: {
+      statistics: {
+        type: Object as PropType<Record<string, string>[]>,
+        default: [
+          {
+            key: 'Orders',
+            value: '94000+',
+          },
+          {
+            key: 'Customers',
+            value: '11000+',
+          },
+          {
+            key: 'Chefs',
+            value: '1500+',
+          },
+        ],
+      },
     },
-  },
-  components: {
-    DecoratorBlob,
-  },
-})
+    components: {
+      DecoratorBlob,
+    },
+  })
 </script>
 
 <style lang="scss">
-.column {
-  @apply w-full max-w-md mx-auto md:max-w-none md:mx-0;
-}
+  .column {
+    @apply w-full max-w-md mx-auto md:max-w-none md:mx-0;
+  }
 </style>

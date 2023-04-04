@@ -1,10 +1,10 @@
 <template>
-  <div class="container" v-if="tabsKeys">
+  <div class="container">
     <div class="content-with-padding-xl">
       <div
         class="header-row flex justify-between items-center flex-col xl:flex-row"
       >
-        <div class="header section-heading">Checkout the Menu</div>
+        <h2 class="header section-heading">Checkout the Menu</h2>
         <div
           class="tabs-control flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0"
         >
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, ref, reactive } from 'vue'
   import StarIcon from 'images/star-icon.svg?component'
   import DecoratorBlob1 from 'images/svg-decorator-blob-5.svg?component'
   import DecoratorBlob2 from 'images/svg-decorator-blob-7.svg?component'
@@ -54,24 +54,44 @@
 
   export default defineComponent({
     props: {
-      tabs: {
-        type: Object as () => Record<string, IProduct[]>,
-        default: {
-          Starters: getRandomCards(),
-          Main: getRandomCards(),
-          Soup: getRandomCards(),
-          Desserts: getRandomCards(),
-        },
+      data: {
+        type: Object as () => IProduct[],
+        default: products,
         required: true,
       },
     },
-    setup(props: any) {
-      const tabsKeys = ref(Object.keys(props.tabs))
-      const activeTab = ref(tabsKeys.value[0])
+    setup(_props: any) {
+      const tabs = reactive<Record<string, IProduct[]>>({
+        Starters: getRandomCards(),
+        Main: getRandomCards(),
+        Soup: getRandomCards(),
+        Desserts: getRandomCards(),
+      })
+      const tabsKeys = reactive(Object.keys(tabs))
+      const activeTab = ref(tabsKeys[0])
       return {
-        tabsKeys: tabsKeys.value,
+        tabs,
+        tabsKeys,
         activeTab,
       }
+    },
+    watch: {
+      data(prev, next) {
+        console.log(prev, next)
+        const obj = {}
+        if (next?.length) {
+          next.forEach((el: IProduct) => {
+            const key = el.categoryTitle as keyof typeof obj
+            const array: IProduct[] = obj[key] || []
+            array.push(el)
+            Object.assign(obj, {
+              [key]: array,
+            })
+          })
+        }
+        this.activeTab = Object.keys(obj)?.[0]
+        this.tabs = obj
+      },
     },
     components: {
       StarIcon,
