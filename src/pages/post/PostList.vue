@@ -27,7 +27,7 @@
                 <div
                   class="category uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8"
                 >
-                  {{ item.category }}
+                  {{ item.categoryTitle }}
                 </div>
                 <div
                   class="creation-date mt-4 uppercase text-gray-600 italic font-semibold text-xs"

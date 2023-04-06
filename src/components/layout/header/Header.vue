@@ -75,7 +75,7 @@
   }
   const searchRecipe = async (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      if (inputValue.value.value?.trim() === '') {
+      if (inputValue?.value.value?.trim() === '') {
         router.push({
           name: 'products',
         })
@@ -83,7 +83,7 @@
         router.push({
           name: 'search',
           query: {
-            s: inputValue.value.value,
+            s: inputValue?.value.value,
           },
         })
     }

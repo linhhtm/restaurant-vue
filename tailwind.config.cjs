@@ -5,6 +5,11 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   mode: 'jit',
   theme: {
+    extend: {
+      inset: {
+        5: '1.25rem',
+      },
+    },
     screens: {
       sm: '640px',
       md: '768px',
@@ -777,10 +782,11 @@ module.exports = {
     transitionProperty: ['responsive'],
     transitionTimingFunction: ['responsive'],
     transitionDuration: ['responsive'],
+    hocus: ['&:hover', '&:focus'],
   },
-  plugins: [
-    plugin(function ({ addVariant }) {
-      addVariant('hocus', ['&:hover', '&:focus'])
-    }),
-  ],
+  // plugins: [
+  //   plugin(function ({ addVariant }) {
+  //     addVariant('hocus', ['&:hover', '&:focus'])
+  //   }),
+  // ],
 }

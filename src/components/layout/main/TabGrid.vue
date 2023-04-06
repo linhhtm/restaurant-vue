@@ -6,10 +6,11 @@
       >
         <h2 class="header section-heading">Checkout the Menu</h2>
         <div
+          v-if="state.tabsKeys?.length"
           class="tabs-control flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0"
         >
           <div
-            v-for="(_item, key) in tabs"
+            v-for="(_item, key) in state.tabs"
             :key="key"
             @click="activeTab = key"
             :class="{ 'tab-control': true, active: activeTab === key }"
@@ -17,15 +18,16 @@
             {{ key }}
           </div>
         </div>
+        <Empty v-else />
       </div>
       <div
         class="tab-content mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12"
-        v-for="(tabKey, index) in tabsKeys"
+        v-for="(tabKey, index) in state.tabsKeys"
         :key="index"
         :style="{ display: tabKey === activeTab ? 'flex' : 'none' }"
       >
         <ProductCard
-          v-for="(card, index) in tabs[tabKey]"
+          v-for="(card, index) in state.tabs[tabKey]"
           :key="index"
           :data="card"
         />
@@ -39,67 +41,48 @@
     />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, ref, reactive } from 'vue'
-  import StarIcon from 'images/star-icon.svg?component'
+<script setup lang="ts">
+  import { ref, reactive, watch } from 'vue'
   import DecoratorBlob1 from 'images/svg-decorator-blob-5.svg?component'
   import DecoratorBlob2 from 'images/svg-decorator-blob-7.svg?component'
-  import { IProduct, ProductCard } from 'components/product'
-  import { products } from 'mockData'
+  import { IProduct, ProductCard, Empty } from 'components'
 
-  const getRandomCards = () => {
-    // Shuffle array
-    return [...products].sort(() => Math.random() - 0.5)
-  }
+  const props = withDefaults(
+    defineProps<{
+      data: IProduct[] | null
+    }>(),
+    {
+      data: null,
+    }
+  )
 
-  export default defineComponent({
-    props: {
-      data: {
-        type: Object as () => IProduct[],
-        default: products,
-        required: true,
-      },
-    },
-    setup(_props: any) {
-      const tabs = reactive<Record<string, IProduct[]>>({
-        Starters: getRandomCards(),
-        Main: getRandomCards(),
-        Soup: getRandomCards(),
-        Desserts: getRandomCards(),
-      })
-      const tabsKeys = reactive(Object.keys(tabs))
-      const activeTab = ref(tabsKeys[0])
-      return {
-        tabs,
-        tabsKeys,
-        activeTab,
-      }
-    },
-    watch: {
-      data(prev, next) {
-        console.log(prev, next)
-        const obj = {}
-        if (next?.length) {
-          next.forEach((el: IProduct) => {
-            const key = el.categoryTitle as keyof typeof obj
-            const array: IProduct[] = obj[key] || []
-            array.push(el)
-            Object.assign(obj, {
-              [key]: array,
-            })
+  const state = reactive<Record<string, IProduct[] | string[] | null | Object>>(
+    {
+      tabs: null,
+      tabsKeys: null,
+    }
+  )
+  const activeTab = ref<string>('')
+
+  watch(
+    () => props.data,
+    (next, prev) => {
+      const obj = {}
+      if (next?.length) {
+        next.forEach((el: any) => {
+          const key = el.categoryTitle as keyof typeof obj
+          const array: IProduct[] = obj[key] || []
+          array.push(el)
+          Object.assign(obj, {
+            [key]: array,
           })
-        }
-        this.activeTab = Object.keys(obj)?.[0]
-        this.tabs = obj
-      },
-    },
-    components: {
-      StarIcon,
-      DecoratorBlob1,
-      DecoratorBlob2,
-      ProductCard,
-    },
-  })
+        })
+      }
+      state.tabsKeys = Object.keys(obj)
+      activeTab.value = Object.keys(obj)?.[0]
+      state.tabs = obj
+    }
+  )
 </script>
 <style lang="scss">
   .tab-control {

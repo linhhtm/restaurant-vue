@@ -14,6 +14,6 @@
     "noEmit": true,
     "baseUrl": "src"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/mockData/data.json"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "public/data.json"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

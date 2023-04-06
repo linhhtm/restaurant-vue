@@ -5,7 +5,7 @@ export interface IAuthor {
 }
 export interface IPost {
   imageSrc: string
-  category: string
+  categoryTitle: string
   title: string
   id: string | number
   date: string

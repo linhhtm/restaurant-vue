@@ -19,7 +19,7 @@
               :style="{ backgroundImage: `url('${item.imageSrc}')` }"
             ></div>
             <div class="category mt-4 text-secondary-100 font-bold text-sm">
-              {{ item.category }}
+              {{ item.categoryTitle }}
             </div>
             <h4 class="title mt-2 leading-relaxed font-bold text-lg">
               {{ item.title }}

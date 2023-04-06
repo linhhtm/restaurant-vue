@@ -1,1 +1,1 @@
-export { default as useAnimatedNavToggler } from './useAnimatedNavToggle'
+export * from './product.hook'

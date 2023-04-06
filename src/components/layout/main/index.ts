@@ -1,4 +1,3 @@
-export { default as Main } from './index.vue'
 export { default as MainFeature } from './MainFeature.vue'
 export { default as Hero } from './Hero.vue'
 export { default as Features } from './Features.vue'

@@ -22,6 +22,8 @@ export default defineConfig({
       hooks: path.resolve(__dirname, './src/hooks'),
       stores: path.resolve(__dirname, './src/stores'),
       mockData: path.resolve(__dirname, './src/mockData'),
+      appConstants: path.resolve(__dirname, './src/appConstants'),
+      services: path.resolve(__dirname, './src/services'),
     },
   },
 })
