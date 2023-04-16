@@ -24,6 +24,7 @@ module.exports = {
       white: '#fff',
 
       primary: {
+        DEFAULT: '#6415ff',
         100: '#a273ff',
         200: '#935bff',
         300: '#8344ff',
@@ -782,11 +783,10 @@ module.exports = {
     transitionProperty: ['responsive'],
     transitionTimingFunction: ['responsive'],
     transitionDuration: ['responsive'],
-    hocus: ['&:hover', '&:focus'],
   },
-  // plugins: [
-  //   plugin(function ({ addVariant }) {
-  //     addVariant('hocus', ['&:hover', '&:focus'])
-  //   }),
-  // ],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant('hocus', ['&:hover', '&:focus'])
+    }),
+  ],
 }

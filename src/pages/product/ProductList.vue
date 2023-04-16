@@ -3,13 +3,29 @@
 </template>
 <script lang="ts">
   import { TabGrid } from 'components'
-  import { products } from 'mockData'
-  import { defineComponent } from 'vue'
+  import { storeToRefs } from 'pinia'
+  import { useProduct } from 'stores'
+  import { defineComponent, watch } from 'vue'
+  import { useRoute } from 'vue-router'
 
   export default defineComponent({
     setup() {
+      const route = useRoute()
+      const storeProduct = useProduct()
+      const { list } = storeToRefs(storeProduct)
+      watch(
+        () => route,
+        (newRoute) => {
+          const query = newRoute.query?.s as string
+          storeProduct.getList({ search: query })
+        },
+        {
+          deep: true,
+          immediate: true,
+        }
+      )
       return {
-        data: products,
+        data: list,
       }
     },
     components: { TabGrid },

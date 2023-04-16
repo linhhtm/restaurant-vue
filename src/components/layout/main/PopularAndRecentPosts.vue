@@ -7,7 +7,7 @@
           <div class="posts-container">
             <router-link
               :key="i"
-              :to="'/posts/' + post.id"
+              :to="PATHS.POSTS + '/' + post.id"
               v-for="(post, i) in popularPosts"
             >
               <div class="post group">
@@ -46,7 +46,7 @@
           <div class="posts-container">
             <router-link
               :key="i"
-              :to="`/posts/${post.id}`"
+              :to="`${PATHS.POSTS}/${post.id}`"
               v-for="(post, i) in recentPosts"
             >
               <div class="post group">
@@ -70,6 +70,7 @@
   import { IPost } from 'components'
   import { posts } from 'mockData'
   import { defineComponent } from 'vue'
+  import { PATHS } from 'appConstants'
 
   export default defineComponent({
     props: {
@@ -81,6 +82,11 @@
         type: Array<IPost>,
         default: posts.slice(0, 5),
       },
+    },
+    setup() {
+      return {
+        PATHS,
+      }
     },
   })
 </script>

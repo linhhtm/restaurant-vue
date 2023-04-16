@@ -12,7 +12,12 @@
       <div
         class="three-column flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap"
       >
-        <div class="column mt-24 lg:w-1/3" v-for="item in data" :key="item.id">
+        <router-link
+          :to="PATHS.POSTS + '/' + item.id"
+          v-for="item in data"
+          :key="item.id"
+          class="column mt-24 lg:w-1/3 hover:text-primary-500"
+        >
           <div class="card lg:mx-4 xl:mx-8 max-w-sm lg:max-w-xs">
             <div
               class="bg-cover bg-center h-80 lg:h-64 rounded"
@@ -24,9 +29,8 @@
             <h4 class="title mt-2 leading-relaxed font-bold text-lg">
               {{ item.title }}
             </h4>
-            <router-link :to="`/posts/${item.id}`"> Read Post </router-link>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <DecoratorBlob1
@@ -42,6 +46,7 @@
   import DecoratorBlob2 from 'assets/images/svg-decorator-blob-3.svg?component'
   import { IPost } from 'components/post'
   import { defineComponent } from 'vue'
+  import { PATHS } from 'appConstants'
 
   export default defineComponent({
     props: {
@@ -50,6 +55,11 @@
     components: {
       DecoratorBlob1,
       DecoratorBlob2,
+    },
+    setup() {
+      return {
+        PATHS,
+      }
     },
   })
 </script>

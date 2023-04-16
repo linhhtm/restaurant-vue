@@ -27,7 +27,7 @@
         :style="{ display: tabKey === activeTab ? 'flex' : 'none' }"
       >
         <ProductCard
-          v-for="(card, index) in state.tabs[tabKey]"
+          v-for="(card, index) in state.tabs?.[tabKey]"
           :key="index"
           :data="card"
         />
@@ -47,6 +47,10 @@
   import DecoratorBlob2 from 'images/svg-decorator-blob-7.svg?component'
   import { IProduct, ProductCard, Empty } from 'components'
 
+  interface PropTabGrid {
+    tabs?: Record<string, IProduct[]>
+    tabsKeys?: string[]
+  }
   const props = withDefaults(
     defineProps<{
       data: IProduct[] | null
@@ -56,12 +60,10 @@
     }
   )
 
-  const state = reactive<Record<string, IProduct[] | string[] | null | Object>>(
-    {
-      tabs: null,
-      tabsKeys: null,
-    }
-  )
+  const state = reactive<PropTabGrid>({
+    tabs: undefined,
+    tabsKeys: undefined,
+  })
   const activeTab = ref<string>('')
 
   watch(
@@ -69,8 +71,8 @@
     (next, prev) => {
       const obj = {}
       if (next?.length) {
-        next.forEach((el: any) => {
-          const key = el.categoryTitle as keyof typeof obj
+        next.forEach((el: IProduct) => {
+          const key = el.strCategory as keyof typeof obj
           const array: IProduct[] = obj[key] || []
           array.push(el)
           Object.assign(obj, {

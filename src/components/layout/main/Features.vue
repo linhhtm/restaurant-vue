@@ -35,7 +35,7 @@
   import celebrationIconImageSrc from 'images/celebration-icon.svg?url'
   import shopIconImageSrc from 'images/shop-icon.svg?url'
   import ArrowRightIcon from 'images/arrow-right-icon.svg?component'
-  import { IFeature } from './index'
+  import { IFeature } from 'type'
 
   export default defineComponent({
     props: {

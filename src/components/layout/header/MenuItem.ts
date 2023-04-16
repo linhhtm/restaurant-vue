@@ -1,18 +1,20 @@
+import { PATHS } from 'appConstants'
+
 const MENU_ITEMS = [
   {
-    path: '/products',
+    path: PATHS.PRODUCTS,
     label: 'Product',
   },
   {
-    path: '/posts',
+    path: PATHS.POSTS,
     label: 'Blog',
   },
   {
-    path: '/about',
+    path: PATHS.ABOUT,
     label: 'About',
   },
   {
-    path: '/contact-us',
+    path: PATHS.CONTACT_US,
     label: 'Contact Us',
   },
 ]

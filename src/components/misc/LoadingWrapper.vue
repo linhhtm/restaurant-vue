@@ -9,29 +9,27 @@
 </script>
 <style lang="scss" scoped>
   .wrap {
-    top: 0;
-    left: 0;
     position: fixed;
-    right: 0;
-    bottom: 0;
+    right: 30px;
+    bottom: 30px;
     background-color: #3a3a3a;
     box-shadow: 0px 40px 60px -20px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
-    opacity: 0.7;
+    z-index: 50;
+    opacity: 1;
   }
 
   /* SPINER */
   .spinner {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    // border: 4px solid var(--tw-primary);
-    border-left: 4px solid #e3e4e7;
+    border: 4px solid #e3e4e7;
+    border-left: 4px solid var(--color-primary);
     animation: spinner 1.5s linear infinite;
-    margin: 100px;
+    margin: 24px;
   }
 
   @keyframes spinner {

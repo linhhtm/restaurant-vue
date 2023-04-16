@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import VueFeather from 'vue-feather'
+import './style.css'
 import App from './App.vue'
 import routes from './routes'
-import './style.css'
 import { createPinia } from 'pinia'
 
 const router = createRouter({

@@ -41,7 +41,7 @@
             >
               <input
                 placeholder="Your Email Address"
-                class="bg-gray-300 px-6 py-3 rounded sm:rounded-r-none border-2 sm:border-r-0 border-gray-400 hover:border-primary-500 focus:outline-none transition duration-300 w-full"
+                class="bg-gray-300 px-6 py-3 rounded sm:rounded-r-none border-2 sm:border-r-0 border-gray-400 hover:border-primary-500 focus:outline-none transition duration-300 w-full placeholder:text-gray-500"
               />
               <button
                 class="btn-primary mt-4 sm:mt-0 w-full sm:w-auto rounded sm:rounded-l-none px-8 py-3"
@@ -59,7 +59,7 @@
         <div
           class="logo-container flex items-center justify-center md:justify-start"
         >
-          <img class="logo-img w-8" src="logo.svg" alt="" />
+          <img class="logo-img w-8" src="/logo.svg" alt="" />
           <h5 class="ml-2 text-xl font-black tracking-wider text-gray-800">
             Treact Inc.
           </h5>
@@ -67,7 +67,7 @@
         <p
           class="copywright-notice text-center text-sm sm:text-base mt-8 md:mt-0 font-medium text-gray-500"
         >
-          &copy; {{new Date().getFullYear()}} Treact Inc. All Rights Reserved.
+          &copy; {{ new Date().getFullYear() }} Treact Inc. All Rights Reserved.
         </p>
         <div class="social-links-container mt-8 md:mt-0 flex">
           <a
@@ -76,7 +76,7 @@
             v-for="(social, i) in socials"
             :key="i"
           >
-          <component :is="social.icon" />
+            <component :is="social.icon" />
           </a>
         </div>
       </div>
@@ -84,138 +84,129 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import FacebookIcon from 'images/facebook-icon.svg?component'
-import TwitterIcon from 'images/twitter-icon.svg?component'
-import YoutubeIcon from 'images/youtube-icon.svg?component'
+  import { defineComponent, PropType } from 'vue'
+  import FacebookIcon from 'images/facebook-icon.svg?component'
+  import TwitterIcon from 'images/twitter-icon.svg?component'
+  import YoutubeIcon from 'images/youtube-icon.svg?component'
+  import { IFooter } from 'type'
 
-interface IFooterLink {
-  url: string
-  name: string
-}
-
-interface IFooter {
-  name: string
-  links: IFooterLink[]
-}
-
-export default defineComponent({
-  props: {
-    sections: {
-      type: Object as PropType<Record<string, IFooter>>,
-      default: {
-        main: {
-          name: 'Main',
-          links: [
-            {
-              url: '#',
-              name: 'Blog',
-            },
-            {
-              url: '#',
-              name: 'FAQs',
-            },
-            {
-              url: '#',
-              name: 'Support',
-            },
-            {
-              url: '#',
-              name: 'About Us',
-            },
-          ],
-        },
-        product: {
-          name: 'Product',
-          links: [
-            {
-              url: '#',
-              name: 'Log In',
-            },
-            {
-              url: '#',
-              name: 'Personal',
-            },
-            {
-              url: '#',
-              name: 'Business',
-            },
-            {
-              url: '#',
-              name: 'Team',
-            },
-          ],
-        },
-        press: {
-          name: 'Press',
-          links: [
-            {
-              url: '#',
-              name: 'Logos',
-            },
-            {
-              url: '#',
-              name: 'Events',
-            },
-            {
-              url: '#',
-              name: 'Stories',
-            },
-            {
-              url: '#',
-              name: 'Office',
-            },
-          ],
-        },
-        legal: {
-          name: 'Legal',
-          links: [
-            {
-              url: '#',
-              name: 'GDPR',
-            },
-            {
-              url: '#',
-              name: 'Privacy Policy',
-            },
-            {
-              url: '#',
-              name: 'Terms of Service',
-            },
-            {
-              url: '#',
-              name: 'Disclaimer',
-            },
-          ],
+  export default defineComponent({
+    props: {
+      sections: {
+        type: Object as PropType<Record<string, IFooter>>,
+        default: {
+          main: {
+            name: 'Main',
+            links: [
+              {
+                url: '#',
+                name: 'Blog',
+              },
+              {
+                url: '#',
+                name: 'FAQs',
+              },
+              {
+                url: '#',
+                name: 'Support',
+              },
+              {
+                url: '#',
+                name: 'About Us',
+              },
+            ],
+          },
+          product: {
+            name: 'Product',
+            links: [
+              {
+                url: '#',
+                name: 'Log In',
+              },
+              {
+                url: '#',
+                name: 'Personal',
+              },
+              {
+                url: '#',
+                name: 'Business',
+              },
+              {
+                url: '#',
+                name: 'Team',
+              },
+            ],
+          },
+          press: {
+            name: 'Press',
+            links: [
+              {
+                url: '#',
+                name: 'Logos',
+              },
+              {
+                url: '#',
+                name: 'Events',
+              },
+              {
+                url: '#',
+                name: 'Stories',
+              },
+              {
+                url: '#',
+                name: 'Office',
+              },
+            ],
+          },
+          legal: {
+            name: 'Legal',
+            links: [
+              {
+                url: '#',
+                name: 'GDPR',
+              },
+              {
+                url: '#',
+                name: 'Privacy Policy',
+              },
+              {
+                url: '#',
+                name: 'Terms of Service',
+              },
+              {
+                url: '#',
+                name: 'Disclaimer',
+              },
+            ],
+          },
         },
       },
+      socials: {
+        type: Object as PropType<Array<Record<string, string>>>,
+        default: [
+          {
+            url: 'https://facebook.com',
+            icon: FacebookIcon,
+          },
+          {
+            url: 'https://facebook.com',
+            icon: TwitterIcon,
+          },
+          {
+            url: 'https://facebook.com',
+            icon: YoutubeIcon,
+          },
+        ],
+      },
     },
-    socials: {
-      type: Object as PropType<Array<Record<string, string>>>,
-      default: [
-        {
-          url: 'https://facebook.com',
-          icon: FacebookIcon,
-        },
-        {
-          url: 'https://facebook.com',
-          icon: TwitterIcon,
-        },
-        {
-          url: 'https://facebook.com',
-          icon: YoutubeIcon,
-        },
-      ],
-    },
-  },
-})
+  })
 </script>
 
 <style lang="scss" scoped>
-.social-link {
-  @apply cursor-pointer p-2 rounded-full bg-gray-900 text-gray-100 hover:bg-gray-700 transition duration-300 mr-4 last:mr-0;
-}
-.social-link svg {
-  @apply w-4 h-4;
-}
+  .social-link {
+    @apply cursor-pointer p-2 rounded-full bg-gray-900 text-gray-100 hover:bg-gray-700 transition duration-300 mr-4 last:mr-0;
+  }
+  .social-link svg {
+    @apply w-4 h-4;
+  }
 </style>

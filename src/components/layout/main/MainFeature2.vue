@@ -98,6 +98,6 @@
 
 <style lang="scss">
   .column {
-    @apply w-full max-w-md mx-auto md:max-w-none md:mx-0;
+    @apply max-w-md mx-auto md:max-w-none md:mx-0;
   }
 </style>

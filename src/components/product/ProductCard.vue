@@ -3,13 +3,13 @@
     class="card-container mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
   >
     <router-link
-      :to="`/products/${data.id}`"
+      :to="`${PATHS.PRODUCTS}/${data.idMeal}`"
       class="group bg-gray-200 rounded-b block max-w-xs mx-auto sm:max-w-none sm:mx-0 relative"
     >
       <div
         class="card-image-container h-56 xl:h-64 bg-center bg-cover relative rounded-t"
         :style="{
-          backgroundImage: `url('${data.imageSrc}')`,
+          backgroundImage: `url('${data.strMealThumb}')`,
         }"
       >
         <div
@@ -38,7 +38,7 @@
         class="card-heart-container cursor-pointer leading-none absolute inline-flex bg-gray-100 top-[20px] left-0 ml-4 mb-4 rounded-full px-1 py-1 items-end"
       >
         <div
-          :class="[{ liked: favoriteObj[data.id] }, 'card-heart']"
+          :class="[{ liked: favoriteObj[data.idMeal] }, 'card-heart']"
           @click.prevent="toFavoriteList(data)"
         >
           <vue-feather
@@ -51,11 +51,13 @@
         </div>
       </div>
       <div class="card-text p-4 text-gray-900">
-        <h5 class="text-lg font-semibold group-hover:text-primary-500">
-          {{ data.title }}
+        <h5
+          class="text-lg font-semibold group-hover:text-primary-500 line-clamp-1"
+        >
+          {{ data.strMeal }}
         </h5>
-        <p class="mt-1 text-sm font-medium text-gray-600">
-          {{ data.content }}
+        <p class="mt-1 text-sm font-medium text-gray-600 line-clamp-3">
+          {{ data.strInstructions }}
         </p>
         <p class="mt-4 text-xl font-bold">{{ data.price }}</p>
       </div>
@@ -66,6 +68,7 @@
   import { defineComponent, PropType } from 'vue'
   import { IProduct } from './Product.type'
   import { useProduct } from 'stores'
+  import { PATHS } from 'appConstants'
 
   export default defineComponent({
     props: {
@@ -84,6 +87,7 @@
       return {
         favoriteObj: storeProduct.favoriteObj,
         toFavoriteList,
+        PATHS,
       }
     },
   })

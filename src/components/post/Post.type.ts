@@ -10,7 +10,7 @@ export interface IPost {
   id: string | number
   date: string
   author: IAuthor
-  featured: boolean
+  featured?: boolean
   views: number
   description: string
 }

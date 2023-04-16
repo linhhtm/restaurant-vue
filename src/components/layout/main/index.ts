@@ -6,5 +6,3 @@ export { default as MainFeature2 } from './MainFeature2.vue'
 export { default as Testimonial } from './Testimonial.vue'
 export { default as DownloadApp } from './DownloadApp.vue'
 export { default as PopularAndRecentPosts } from './PopularAndRecentPosts.vue'
-
-export * from './type'

@@ -3,9 +3,7 @@
     <div
       class="two-column flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24"
     >
-      <div
-        class="column image-column md:w-6/12 lg:w-5/12 flex-shrink-0 h-80 md:h-auto"
-      >
+      <div class="column image-column">
         <div
           class="rounded bg-cover bg-center h-full"
           :style="{
@@ -13,9 +11,7 @@
           }"
         ></div>
       </div>
-      <div
-        class="text-column column md:w-6/12 mt-8 md:mt-0 md:ml-8 lg:ml-16 md:order-last"
-      >
+      <div class="text-column column">
         <div class="text-content lg:py-8">
           <div
             class="section-heading text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight"
@@ -42,19 +38,22 @@
         </div>
       </div>
     </div>
-    <ThreeColSimpleWithImage :data="posts" />
   </div>
 </template>
 <script lang="ts">
   import { ThreeColSimpleWithImage } from 'components'
-  import { posts } from 'mockData'
-  import { defineComponent } from 'vue'
+  import { PropType, defineComponent } from 'vue'
 
   export default defineComponent({
+    props: {
+      data: {
+        type: Object as PropType<Record<string, any>>,
+        default: {},
+      },
+    },
+    components: { ThreeColSimpleWithImage },
     setup() {
       return {
-        posts,
-        data: posts[1],
         statistics: [
           {
             key: 'People like this',
@@ -63,12 +62,17 @@
         ],
       }
     },
-    components: { ThreeColSimpleWithImage },
   })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .column {
     @apply w-full max-w-md mx-auto md:max-w-none md:mx-0;
+  }
+  .image-column {
+    @apply md:w-6/12 lg:w-5/12 flex-shrink-0 h-80 md:h-auto;
+  }
+  .text-column {
+    @apply md:w-6/12 mt-8 md:mt-0 md:ml-8 lg:ml-16 md:order-last;
   }
 </style>

@@ -1,17 +1,19 @@
 import { IProduct } from 'components'
 import { defineStore } from 'pinia'
-// import { useLoading } from './useLoading'
 import { productService } from 'services'
-import { handleApi } from 'services/API'
+import { IPaginator } from 'type'
+import { useLoading } from './useLoading'
 
 const STORE_NAME = 'product'
 const LOADING_PRODUCT = {
-  PRODUCT_LIST: 'product_list',
+  LIST: 'product_list',
+  DETAIL: 'product_detail',
 }
 
 interface StateProduct {
   list?: IProduct[]
-  favoriteObj: Record<IProduct['id'], IProduct>
+  favoriteObj: Record<IProduct['idMeal'], IProduct>
+  detail: IProduct
 }
 
 const useProduct = defineStore(STORE_NAME, {
@@ -19,6 +21,7 @@ const useProduct = defineStore(STORE_NAME, {
     return {
       favoriteObj: {},
       list: undefined,
+      detail: {} as IProduct,
     }
   },
   getters: {
@@ -32,15 +35,27 @@ const useProduct = defineStore(STORE_NAME, {
   },
   actions: {
     updateFavoriteObj(data: IProduct) {
-      if (this.favoriteObj[data.id]) {
-        delete this.favoriteObj[data.id]
+      if (this.favoriteObj[data.idMeal]) {
+        delete this.favoriteObj[data.idMeal]
       } else {
-        this.favoriteObj[data.id] = data
+        this.favoriteObj[data.idMeal] = data
       }
     },
-    async getList() {
-      const res = await productService.getProductList()
-      this.list = res.data?.products
+    async getList(data?: IPaginator) {
+      const storeLoading = useLoading()
+      const res = await storeLoading.loadingwrapper(
+        () => productService.getProductList(data),
+        LOADING_PRODUCT.LIST
+      )
+      this.list = res?.data?.products
+    },
+    async getDetail(id: IProduct['idMeal']) {
+      const storeLoading = useLoading()
+      const res = await storeLoading.loadingwrapper(
+        () => productService.getProductDetail(id),
+        LOADING_PRODUCT.DETAIL
+      )
+      this.detail = res?.data
     },
   },
 })

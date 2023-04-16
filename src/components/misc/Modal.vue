@@ -43,7 +43,7 @@
       title: 'List',
     }
   )
-  const showModal = ref(false)
+  const showModal = ref<boolean | undefined>(false)
 
   watch(
     () => props.show,

@@ -29,7 +29,7 @@
             >Login</router-link
           >
           <router-link
-            class="header__navlink btn-primary lg:mx-0 lg:px-4 xl:px-8 py-3 rounded bg-primary-500 text-gray-100 hover:bg-primary-700 hover:text-gray-200 focus:shadow-outline border-b-0"
+            class="header__navlink h-full btn-primary !mx-0 lg:px-8"
             to="/"
           >
             Sign up
@@ -39,7 +39,11 @@
     </DesktopNavLinks>
     <MobileHeader />
     <Modal title="Favorite list" :show="showModal" :onClose="toggleModal">
-      <ProductCard v-for="data in favoriteList" :key="data.id" :data="data" />
+      <ProductCard
+        v-for="data in favoriteList"
+        :key="data.idMeal"
+        :data="data"
+      />
     </Modal>
   </header>
 </template>
@@ -66,7 +70,7 @@
 
   const router = useRouter()
   const showModal = ref(false)
-  const inputValue = ref(null)
+  const inputValue = ref<string>('')
 
   const storeProduct = useProduct()
   const { favoriteList } = storeToRefs(storeProduct)
@@ -75,17 +79,13 @@
   }
   const searchRecipe = async (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      if (inputValue?.value.value?.trim() === '') {
-        router.push({
-          name: 'products',
-        })
-      } else
-        router.push({
-          name: 'search',
-          query: {
-            s: inputValue?.value.value,
-          },
-        })
+      const value = inputValue.value?.trim()
+      router.push({
+        name: 'search',
+        query: {
+          s: value,
+        },
+      })
     }
   }
 </script>

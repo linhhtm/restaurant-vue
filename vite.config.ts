@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
 import svgLoader from 'vite-svg-loader'
+import checker from 'vite-plugin-checker'
 
 export default defineConfig({
   plugins: [
@@ -11,6 +12,7 @@ export default defineConfig({
     svgLoader({
       defaultImport: 'component',
     }),
+    checker({ vueTsc: true }),
   ],
   resolve: {
     alias: {

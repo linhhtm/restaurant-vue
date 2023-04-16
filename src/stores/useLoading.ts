@@ -1,3 +1,4 @@
+import { TOAST_COLOR } from 'appConstants'
 import { AxiosResponse } from 'axios'
 import { defineStore } from 'pinia'
 import { useToast } from './useToast'
@@ -16,7 +17,7 @@ const useLoading = defineStore(STORE_NAME, {
   getters: {
     isLoading: (state) => {
       if (state.loadingObj) {
-        const isLoading = Object.keys(state.loadingObj).every(
+        const isLoading = Object.keys(state.loadingObj).find(
           (key) => state.loadingObj?.[key]
         )
         return isLoading
@@ -29,27 +30,32 @@ const useLoading = defineStore(STORE_NAME, {
       this.loadingObj = { ...this.loadingObj, ...data }
     },
     async loadingwrapper(
-      callback: () =>
+      callApi: () =>
         | Promise<void>
         | Promise<AxiosResponse<any, any>>
         | AxiosResponse<any, any>,
-      loading: string
+      loadingName: string,
+      callback?: () => void
     ) {
-      this.loadingObj = { ...this.loadingObj, [loading]: true }
+      this.loadingObj = { ...this.loadingObj, [loadingName]: true }
+      console.log(this.loadingObj)
       try {
-        await callback()
-      } catch (err) {
+        const res = await callApi()
+        typeof callback === 'function' && callback()
+        return res
+      } catch (err: any) {
         const storeToast = useToast()
         storeToast.updateToast([
           {
             type: 'danger',
-            message: 'error',
+            color: TOAST_COLOR['danger'],
+            message: err?.message || 'Error',
           },
         ])
         console.log(err)
         return Promise.reject(err)
       } finally {
-        this.loadingObj = { ...this.loadingObj, [loading]: false }
+        this.loadingObj = { ...this.loadingObj, [loadingName]: false }
       }
     },
   },

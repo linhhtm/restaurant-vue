@@ -6,14 +6,14 @@
       </div>
       <div class="posts mt-6 sm:-mr-8 flex flex-wrap">
         <div
-          v-for="item in data?.slice(0, visible)"
+          v-for="item in state.data?.slice(0, visible)"
           :class="{
             'post-container': true,
             featured: item.featured,
           }"
           :key="item.id"
         >
-          <router-link :to="`posts/${item.id}`">
+          <router-link :to="`${PATHS.POSTS}/${item.id}`">
             <div
               class="post group cursor-pointer flex flex-col bg-gray-100 rounded-lg"
             >
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div
-        v-if="visible < data?.length"
+        v-if="visible < state.total"
         class="button-container flex justify-center"
       >
         <div
@@ -67,20 +67,37 @@
 <script setup lang="ts">
   import { IPost } from 'components'
   import { posts } from 'mockData'
-  import { ref } from 'vue'
-  withDefaults(
+  import { storeToRefs } from 'pinia'
+  import { usePost } from 'stores/usePost'
+  import { onBeforeMount, reactive, ref } from 'vue'
+  import { PATHS } from 'appConstants'
+
+  const props = withDefaults(
     defineProps<{
       data: IPost[]
     }>(),
     {
-      data: posts,
+      data: () => posts,
     }
   )
 
-  const visible = ref(7)
+  const state = reactive<any>({ data: undefined })
+  const visible = ref(6)
+
+  const storePost = usePost()
+
   const onLoadMoreClick = () => {
-    visible.value += 6
+    visible.value += visible.value
+    storePost.getList({ size: visible.value })
   }
+
+  onBeforeMount(() => {
+    storePost.getList({ size: visible.value })
+    const { list, total } = storeToRefs(storePost)
+    console.log(list, list?.value)
+    state.data = list || props.data
+    state.total = total
+  })
 </script>
 <style lang="scss" scoped>
   .post-container {

@@ -4,7 +4,7 @@
   >
     <LoadingWrapper />
     <Header />
-    <router-view></router-view>
+    <router-view />
     <Footer />
     <Toast />
   </div>
